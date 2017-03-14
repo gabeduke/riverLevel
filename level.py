@@ -11,10 +11,10 @@ logger = logging.getLogger(__name__)
 
 
 def _initialise(bot):
-    plugins.register_user_command(['level', 'riverLevel'])
+    plugins.register_user_command(['river'])
 
 
-def level(bot, event):
+def river(bot, event, *args):
     # Gather XML Data
     link = "http://water.weather.gov/ahps2/hydrograph_to_xml.php?gage=rmdv2&output=xml"
     link_image = "http://water.weather.gov/resources/hydrographs/rmdv2_hg.png"
