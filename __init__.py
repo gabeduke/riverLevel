@@ -6,7 +6,6 @@ import xml.etree.ElementTree as ET
 import aiohttp
 import requests
 import plugins
-from bs4 import BeautifulSoup
 
 logger = logging.getLogger(__name__)
 
@@ -23,10 +22,14 @@ def level(bot, event, *args):
     level_xml_string = requests.get(level_http_link).text
 
     level_file = os.path.basename(level_image_link)
-    level_image_data = image_downloader(level_image_link)
+    r = yield from aiohttp.request('get', level_image_link)
+    raw = yield from r.read()
+    level_image_data = io.BytesIO(raw)
 
     temp_file = os.path.basename(temp_image_link)
-    temp_image_data = image_downloader(temp_image_link)
+    r = yield from aiohttp.request('get', temp_image_link)
+    raw = yield from r.read()
+    temp_image_data = io.BytesIO(raw)
 
     # Parse XML Data
     root = ET.fromstring(level_xml_string)
@@ -43,9 +46,3 @@ def level(bot, event, *args):
     yield from bot.coro_send_message(event.conv.id_, None, image_id=level_image_id)
     yield from bot.coro_send_message(event.conv.id_, None, image_id=temp_image_id)
 
-
-def image_downloader(link):
-    level_file = os.path.basename(link)
-    r = yield from aiohttp.request('get', link)
-    raw = yield from r.read()
-    return io.BytesIO(raw)
