@@ -37,8 +37,6 @@ def level(bot, event, *args):
     # Parse Latest Reading
     latest = root.find("./observed/datum")
 
-    logger.info("getting {}".format(level_image_link))
-
     level_image_id = yield from bot._client.upload_image(level_image_data, filename=level_file)
     temp_image_id = yield from bot._client.upload_image(temp_image_data, filename=temp_file)
 
