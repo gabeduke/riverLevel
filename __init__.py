@@ -22,14 +22,14 @@ def level(bot, event, *args):
     level_xml_string = requests.get(level_http_link).text
 
     level_file = os.path.basename(level_image_link)
-    r = yield from aiohttp.request('get', level_image_link)
-    raw = yield from r.read()
-    level_image_data = io.BytesIO(raw)
+    levelr = yield from aiohttp.request('get', level_image_link)
+    levelraw = yield from levelr.read()
+    level_image_data = io.BytesIO(levelraw)
 
     temp_file = os.path.basename(temp_image_link)
-    r = yield from aiohttp.request('get', temp_image_link)
-    raw = yield from r.read()
-    temp_image_data = io.BytesIO(raw)
+    tempr = yield from aiohttp.request('get', temp_image_link)
+    tempraw = yield from tempr.read()
+    temp_image_data = io.BytesIO(tempraw)
 
     # Parse XML Data
     root = ET.fromstring(level_xml_string)
