@@ -8,5 +8,7 @@ setup(
     license='',
     author='gabeduke',
     author_email='',
-    description='', requires=['requests']
+    description='',
+    requires=['requests'],
+    modules=['level'],
 )
