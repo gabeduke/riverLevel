@@ -4,20 +4,35 @@ import requests
 from flask import Flask
 
 river_level = Flask(__name__)
-graph_link = "http://water.weather.gov/resources/hydrographs/rmdv2_hg.png"
+level_graph_link = "http://water.weather.gov/resources/hydrographs/rmdv2_hg.png"
+temp_graph_link = "https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=02035000&parm_cd=00010&period=7"
 
 
 @river_level.route('/level')
 def level_val():
-    return main()
+    return level()
 
 
-@river_level.route('/link')
+@river_level.route('/level/link')
 def level_link():
-    return graph_link
+    return level_graph_link
 
 
-def main():
+@river_level.route('/temp')
+def level_temp():
+    return temp()
+
+
+@river_level.route('/temp/link')
+def temp_link():
+    return temp_graph_link
+
+
+def temp():
+    return true
+
+
+def level():
     # Gather XML Data
     link = "http://water.weather.gov/ahps2/hydrograph_to_xml.php?gage=rmdv2&output=xml"
     xmlString = requests.get(link).text

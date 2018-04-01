@@ -1,0 +1,16 @@
+apiVersion: skaffold/v1alpha2
+kind: Config
+build:
+  artifacts:
+  - imageName: docker.io/dukeman/riverlevel
+    workspace: .
+  local: {}
+deploy:
+  helm:
+    releases:
+    - name: level
+      chartPath: charts/level
+      namespace: default
+      valuesFilePath: values-leetserve.yaml
+      values:
+        image.repository: docker.io/dukeman/riverlevel
