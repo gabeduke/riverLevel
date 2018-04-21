@@ -8,6 +8,7 @@ from flask import Flask
 
 river_level = Flask(__name__)
 level_graph_link = "http://water.weather.gov/resources/hydrographs/rmdv2_hg.png"
+temp_graph_link = "https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=02035000&parm_cd=00010&period=7"
 
 
 @river_level.route('/level')
@@ -31,7 +32,8 @@ def temp_link():
 
 
 def temp():
-    return trueOO
+    tempError = "Temp is not defined yet"
+    return tempError
 
 
 def level():
