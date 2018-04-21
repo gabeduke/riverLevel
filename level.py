@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 import xml.etree.ElementTree as ET
 import requests
+import re
+
+from bs4 import BeautifulSoup
 from flask import Flask
 
 river_level = Flask(__name__)
 level_graph_link = "http://water.weather.gov/resources/hydrographs/rmdv2_hg.png"
-temp_graph_link = "https://waterdata.usgs.gov/nwisweb/graph?agency_cd=USGS&site_no=02035000&parm_cd=00010&period=7"
 
 
 @river_level.route('/level')
@@ -29,7 +31,7 @@ def temp_link():
 
 
 def temp():
-    return true
+    return trueOO
 
 
 def level():
@@ -48,6 +50,24 @@ def level():
     reading_str = "River Level is: {}".format(reading)
 
     return "{}".format(reading_str)
+
+
+@river_level.route('/links')
+def get_image_links():
+
+    link = "https://waterdata.usgs.gov/nwis/uv?cb_00010=on&cb_00060=on&format=gif_stats&site_no=02035000&period=7"
+
+    page = requests.get(link)
+    soup = BeautifulSoup(page.text, 'html.parser')
+    imgs = soup.findAll('img')
+    links = []
+
+    for img in imgs:
+        if (re.search('02035000', str(img))):
+            links.append(img['src'])
+
+    pprint = (', '.join(links))
+    return pprint
 
 
 if __name__ == "__main__":

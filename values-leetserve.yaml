@@ -4,8 +4,8 @@
 replicaCount: 1
 nameOverride: level
 image:
-  pullPolicy: IfNotPresent
-  repository: docker.io/dukeman/riverlevel
+  pullPolicy: Always
+  repository: docker.io/dukeman/riverlevel:latest
 ingress:
   enabled: true
 basedomain: leetserve.com
