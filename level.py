@@ -74,4 +74,4 @@ def get_image_links():
 
 if __name__ == "__main__":
     """ This is executed when run from the command line """
-    river_level.run(debug=True, host='0.0.0.0')
+    river_level.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
